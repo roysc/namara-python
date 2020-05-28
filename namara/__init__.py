@@ -16,8 +16,11 @@ class Namara:
         self.base_path = '{0}/{1}'.format(self.host, self.api_version)
         self.headers = {'Content-Type': 'application/json', 'X-API-Key': api_key}
     
-    def export(self, dataset_id, organization_id, options=None, output_format='url', output_file=None):
-        url = self.get_url(f'/data_sets/{dataset_id}/data/export?geometry_format=wkt&organization_id={organization_id}')
+    def export(self, dataset_id, organization_id=None, options=None, output_format='url', output_file=None):
+        url_str = f'/data_sets/{dataset_id}/data/export?geometry_format=wkt'
+        if organization_id is not None:
+            url_str += f'&organization_id={organization_id}'
+        url = self.get_url()
         while True: 
             response = self.__session.get(url, params=options, headers=self.headers).result().json()
             if self.debug: 
