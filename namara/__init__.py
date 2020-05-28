@@ -20,7 +20,7 @@ class Namara:
         url_str = f'/data_sets/{dataset_id}/data/export?geometry_format=wkt'
         if organization_id is not None:
             url_str += f'&organization_id={organization_id}'
-        url = self.get_url()
+        url = self.get_url(url_str)
         while True:
             response = self.__session.get(url, params=options, headers=self.headers).result().json()
             if self.debug:
