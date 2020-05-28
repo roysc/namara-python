@@ -59,9 +59,9 @@ class Namara:
             if self.debug: 
                 logging.debug('REQUEST URL: ' + response.url)
             response.data = self.__extract_datasets(response.json()) if response.ok else response.json()
-            if output_format is 'json': 
+            if output_format == 'json': 
                 return response.data 
-            elif output_format is 'dataframe': 
+            elif output_format == 'dataframe': 
                 df = pd.DataFrame(response.data)
                 return df
             else: 
@@ -72,9 +72,9 @@ class Namara:
             if self.debug: 
                 logging.debug('REQUEST URL: ' + response.url)
             response.data = response.json()
-            if output_format is 'json': 
+            if output_format == 'json': 
                 callback(response.data)
-            elif output_format is 'dataframe': 
+            elif output_format == 'dataframe': 
                 df = pd.DataFrame(response.data)
                 callback(df)
             else: 
@@ -98,9 +98,9 @@ class Namara:
             response = self.__session.get(url, params=options, headers=self.headers).result().json()
             if self.debug: 
                 logging.debug('REQUEST URL: ' + response.url)
-            if output_format is 'json': 
+            if output_format == 'json': 
                 return response
-            elif output_format is 'dataframe': 
+            elif output_format == 'dataframe': 
                 return pd.DataFrame(response)
             else: 
                 raise ValueError('`output_format` param must be "json" or "dataframe"')
@@ -109,9 +109,9 @@ class Namara:
             if self.debug: 
                 logging.debug('REQUEST URL: ' + response.url)
             response.data = response.json()
-            if output_format is 'json': 
+            if output_format == 'json': 
                 callback(response.data)
-            elif output_format is 'dataframe': 
+            elif output_format == 'dataframe': 
                 df = pd.DataFrame(response.data)
                 callback(df)
             else: 
